@@ -20,7 +20,7 @@ public class IncrementalValueTest extends BaseBenchmarkTest {
     }
 
     @Benchmark
-    public void treeBigInt() throws InterruptedException, ExecutionException {
+    public void treeValueIncrease() throws InterruptedException, ExecutionException {
         TreePrimeCalculator.main(new String[]{incremental_value});
     }
 }
