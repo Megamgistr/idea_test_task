@@ -1,0 +1,6 @@
+input,expected
+"dsa", "java.lang.NumberFormatException"
+"10.0", "java.lang.NumberFormatException"
+"", "java.lang.NumberFormatException"
+"-10", "java.lang.IllegalArgumentException"
+"0x7fffffffffffffffL", "java.lang.IllegalArgumentException"
