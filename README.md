@@ -5,11 +5,14 @@ This project was created for test prime calculator functionality.
 ## Project structure
 history - folder for local save benchmark run results
 
+snapshots - YourKit snapshots
+
 src -> jmh - folder with benchmark tests
 
 src -> main - folder with prime calculator implementations
 
 src -> test - folder with functional test
+
 
 ## Usage
 

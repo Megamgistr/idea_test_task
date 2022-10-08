@@ -5,8 +5,6 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 
-import java.util.concurrent.ExecutionException;
-
 @State(Scope.Benchmark)
 public class LargeExecutionTest extends BaseBenchmarkTest {
     @Param({"10000"})
@@ -27,7 +25,7 @@ public class LargeExecutionTest extends BaseBenchmarkTest {
     }
 
     @Benchmark
-    public void treeLargeExecution() throws InterruptedException, ExecutionException {
+    public void treeLargeExecution() throws InterruptedException {
         for (int i = 0; i < 1000; i++) {
             TreePrimeCalculator.main(new String[]{LARGE_EXECUTION_VALUE});
         }

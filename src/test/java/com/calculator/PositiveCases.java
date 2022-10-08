@@ -3,8 +3,6 @@ package com.calculator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.util.concurrent.ExecutionException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PositiveCases extends BasePositiveTest {
@@ -25,7 +23,7 @@ public class PositiveCases extends BasePositiveTest {
 
     @ParameterizedTest(name = "Tree valid value {0}")
     @CsvFileSource(resources = "/valid_test_data.csv", numLinesToSkip = 1)
-    void treeValidValues(String input, String expected) throws InterruptedException, ExecutionException {
+    void treeValidValues(String input, String expected) throws InterruptedException {
         TreePrimeCalculator.main(new String[]{input});
         assertEquals(expected, outContent.toString());
     }

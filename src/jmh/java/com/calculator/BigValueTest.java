@@ -3,10 +3,8 @@ package com.calculator;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
-import java.util.concurrent.ExecutionException;
-
 public class BigValueTest extends BaseBenchmarkTest {
-    @Param({"100000"})
+    @Param({"500000"})
     private String BIG_INT_VALUE;
 
     @Benchmark
@@ -20,7 +18,7 @@ public class BigValueTest extends BaseBenchmarkTest {
     }
 
     @Benchmark
-    public void treeBigInt() throws InterruptedException, ExecutionException {
+    public void treeBigInt() throws InterruptedException {
         TreePrimeCalculator.main(new String[]{BIG_INT_VALUE});
     }
 }
