@@ -42,14 +42,14 @@ public class RawPrimeCalculator {
             public BigIntegerIterator get() {
                 return new BigIntegerIterator(i++);
             }
-        }).limit(maxPrime-1).collect(Collectors.toList());
+        }).limit(maxPrime).collect(Collectors.toList());
 
         for (BigIntegerIterator integer : myFiller) {
             primeNumbers.add(integer.getContain());
         }
 
         List<Integer> primeNumbersToRemove = Collections.synchronizedList(new LinkedList<>());
-        CountDownLatch latch = new CountDownLatch(maxPrime-1);
+        CountDownLatch latch = new CountDownLatch(maxPrime);
         //        ExecutorService executors = Executors.newCachedThreadPool();
         ForkJoinPool executors = new ForkJoinPool();
         synchronized (primeNumbersToRemove) {
