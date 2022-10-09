@@ -56,7 +56,7 @@ public class TreePrimeCalculator {
         executors.shutdownNow();
 
         for (Integer prime : set) {
-//            System.out.print(prime + "\n");
+            System.out.print(prime + "\n");
         }
     }
 

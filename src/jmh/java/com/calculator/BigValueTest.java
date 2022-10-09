@@ -4,7 +4,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 
 public class BigValueTest extends BaseBenchmarkTest {
-    @Param({"500000"})
+    @Param({"100000"})
     private String BIG_INT_VALUE;
 
     @Benchmark
