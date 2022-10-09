@@ -48,7 +48,6 @@ public class RawPrimeCalculator {
 
         List<Integer> primeNumbersToRemove = Collections.synchronizedList(new LinkedList<>());
         CountDownLatch latch = new CountDownLatch(maxPrime);
-        //        ExecutorService executors = Executors.newCachedThreadPool();
         ForkJoinPool executors = new ForkJoinPool();
         synchronized (primeNumbersToRemove) {
             for (Integer candidate : primeNumbers) {

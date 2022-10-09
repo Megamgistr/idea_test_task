@@ -27,7 +27,6 @@ public class FixedPrimeCalculator {
                 .limit(limit)
                 .collect(Collectors.toCollection(ConcurrentLinkedQueue::new));
         CountDownLatch latch = new CountDownLatch(limit);
-        //        ExecutorService executors = Executors.newCachedThreadPool();
         ForkJoinPool executors = new ForkJoinPool();
         for (Integer candidate : primeNumbers) {
             executors.submit(() -> {
