@@ -25,9 +25,6 @@ public class TreePrimeCalculator {
 
     public static void main(String[] args) throws InterruptedException {
         int maxPrime = Integer.parseInt(args[0]);
-        int currentChunkSize = 10000;
-        int chunkCount = getChunkCount(maxPrime, currentChunkSize);
-
         if (maxPrime < 0) {
             throw new IllegalArgumentException("Value must be greater or equal to 0 ");
         }
@@ -36,23 +33,24 @@ public class TreePrimeCalculator {
             return;
         }
 
-//        ExecutorService executors = Executors.newCachedThreadPool();
+        int chunkSize = 10000;
+        int chunkCount = getChunkCount(maxPrime, chunkSize);
+        CountDownLatch latch = new CountDownLatch(chunkCount);
         ForkJoinPool executors = new ForkJoinPool();
         Set<Integer> set = new ConcurrentSkipListSet<>();
-        CountDownLatch latch = new CountDownLatch(chunkCount);
 
         int start = 2;
-        int end = Math.min(maxPrime, start + currentChunkSize);
+        int end = Math.min(maxPrime, start + chunkSize);
         for (int i = 0; i < chunkCount; i++) {
             int finalStart = start;
             int finalEnd = end;
             executors.submit(() -> {
-                getPrimes(finalStart, finalEnd, set);
+                addPrimes(finalStart, finalEnd, set);
                 latch.countDown();
             });
             start = end + 1;
-            end = Math.min(maxPrime, start + currentChunkSize);
-            currentChunkSize = Math.min(1, currentChunkSize / 10);
+            end = Math.min(maxPrime, start + chunkSize);
+            chunkSize = Math.min(1, chunkSize / 10);
         }
         latch.await();
         executors.shutdownNow();
@@ -62,10 +60,9 @@ public class TreePrimeCalculator {
         }
     }
 
-    private static void getPrimes(int start, int end, Set<Integer> set) {
+    private static void addPrimes(int start, int end, Set<Integer> set) {
         AtomicInteger current = new AtomicInteger(start);
-        Stream
-                .generate(current::getAndIncrement)
+        Stream.generate(current::getAndIncrement)
                 .limit(Math.max(end - start + 1, 0))
                 .filter(NumberUtils::isPrime)
                 .forEach(set::add);
