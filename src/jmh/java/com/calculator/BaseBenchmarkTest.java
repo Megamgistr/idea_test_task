@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 @State(Scope.Benchmark)
-public abstract class BaseBenchmarkTest {
+public class BaseBenchmarkTest {
     @Setup(Level.Trial)
     public void setUp() {
         System.setOut(new PrintStream(new ByteArrayOutputStream()));
