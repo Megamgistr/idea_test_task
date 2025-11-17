@@ -1,7 +1,5 @@
 name: resolve conflicts
-on:
-  pull_request:
-    types: [synchronize, opened]
+on: push
 
 jobs:
   junie:
