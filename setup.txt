@@ -1,0 +1,2 @@
+setup.txt was created to address GitHub issue #56.
+Date: 2025-11-19
