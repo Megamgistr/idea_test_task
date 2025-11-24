@@ -24,4 +24,9 @@ public class IncrementalValueTest extends BaseBenchmarkTest {
     public void treeValueIncrease() throws InterruptedException {
         TreePrimeCalculator.main(new String[]{incremental_value});
     }
+
+    @Benchmark
+    public void segmentedSieveValueIncrease() throws InterruptedException {
+        SegmentedSievePrimeCalculator.main(new String[]{incremental_value});
+    }
 }

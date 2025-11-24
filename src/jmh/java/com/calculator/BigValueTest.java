@@ -24,4 +24,9 @@ public class BigValueTest extends BaseBenchmarkTest {
     public void treeBigInt() throws InterruptedException {
         TreePrimeCalculator.main(new String[]{BIG_INT_VALUE});
     }
+
+    @Benchmark
+    public void segmentedSieveBigInt() throws InterruptedException {
+        SegmentedSievePrimeCalculator.main(new String[]{BIG_INT_VALUE});
+    }
 }

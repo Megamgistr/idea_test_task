@@ -23,4 +23,10 @@ public class NegativeCases {
     void treeInvalidValues(String input, String expected) throws ClassNotFoundException {
         Assertions.assertThrows(Class.forName(expected).asSubclass(Throwable.class), () -> TreePrimeCalculator.main(new String[]{input}));
     }
+
+    @ParameterizedTest(name = "SegmentedSieve invalid value {0}")
+    @CsvFileSource(resources = "/invalid_test_data.csv", numLinesToSkip = 1)
+    void segmentedSieveInvalidValues(String input, String expected) throws ClassNotFoundException {
+        Assertions.assertThrows(Class.forName(expected).asSubclass(Throwable.class), () -> SegmentedSievePrimeCalculator.main(new String[]{input}));
+    }
 }

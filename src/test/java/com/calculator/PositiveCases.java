@@ -27,4 +27,11 @@ public class PositiveCases extends BasePositiveTest {
         TreePrimeCalculator.main(new String[]{input});
         assertEquals(expected, outContent.toString());
     }
+
+    @ParameterizedTest(name = "SegmentedSieve valid value {0}")
+    @CsvFileSource(resources = "/valid_test_data.csv", numLinesToSkip = 1)
+    void segmentedSieveValidValues(String input, String expected) throws InterruptedException {
+        SegmentedSievePrimeCalculator.main(new String[]{input});
+        assertEquals(expected, outContent.toString());
+    }
 }

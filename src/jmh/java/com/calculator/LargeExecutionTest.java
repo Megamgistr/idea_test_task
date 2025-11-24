@@ -30,4 +30,11 @@ public class LargeExecutionTest extends BaseBenchmarkTest {
             TreePrimeCalculator.main(new String[]{LARGE_EXECUTION_VALUE});
         }
     }
+
+    @Benchmark
+    public void segmentedSieveLargeExecution() throws InterruptedException {
+        for (int i = 0; i < 1000; i++) {
+            SegmentedSievePrimeCalculator.main(new String[]{LARGE_EXECUTION_VALUE});
+        }
+    }
 }
