@@ -1,0 +1,29 @@
+name: junie validate pr
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  junie:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Junie
+        id: junie
+        uses: Megamgistr/gh-action@main
+        with:
+          junie_api_key: ${{ secrets.JUNIE_API_KEY }}
+          prompt: |
+            Please review this pull request with a focus on:
+            - Code quality and best practices
+            - Potential bugs or issues
+            - Security implications
+            - Performance considerations
