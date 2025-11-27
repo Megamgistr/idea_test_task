@@ -35,7 +35,16 @@ public class SegmentedSievePrimeCalculator {
         if (args.length == 0) {
             throw new NumberFormatException("Missing argument");
         }
-        int maxPrime = Integer.parseInt(args[0]);
+        int maxPrime;
+        try {
+            maxPrime = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            String s = args[0];
+            if (s != null && s.matches("(?i)^0x[0-9a-f]+l?$")) {
+                throw new IllegalArgumentException("Unsupported number format");
+            }
+            throw e;
+        }
         if (maxPrime < 0) {
             throw new IllegalArgumentException("Value must be greater or equal to 0");
         }

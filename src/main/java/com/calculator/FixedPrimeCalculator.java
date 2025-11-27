@@ -15,7 +15,17 @@ public class FixedPrimeCalculator {
         return new java.util.ArrayList<>(getPrimes(maxPrime));
     }
     public static void main(String[] args) throws InterruptedException {
-        for (Integer prime : getPrimes(Integer.parseInt(args[0]))) {
+        int maxPrime;
+        try {
+            maxPrime = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            String s = args.length > 0 ? args[0] : "";
+            if (s.matches("(?i)^0x[0-9a-f]+l?$")) {
+                throw new IllegalArgumentException("Unsupported number format");
+            }
+            throw e;
+        }
+        for (Integer prime : getPrimes(maxPrime)) {
             System.out.print(prime + "\n");
         }
     }

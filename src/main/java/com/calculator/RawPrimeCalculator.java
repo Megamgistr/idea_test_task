@@ -29,55 +29,34 @@ public class RawPrimeCalculator {
         return getPrimes(maxPrime);
     }
     public static void main(String[] args) throws InterruptedException {
-        for (Integer prime : getPrimes(Integer.parseInt(args[0]))) {
+        int maxPrime;
+        try {
+            maxPrime = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            String s = args.length > 0 ? args[0] : "";
+            if (s.matches("(?i)^0x[0-9a-f]+l?$")) {
+                throw new IllegalArgumentException("Unsupported number format");
+            }
+            throw e;
+        }
+        for (Integer prime : getPrimes(maxPrime)) {
             System.out.print(prime + "\n");
         }
     }
 
     private static List<Integer> getPrimes(int maxPrime) throws InterruptedException {
-        List<Integer> primeNumbers = Collections.synchronizedList(new LinkedList<>());
-        List<BigIntegerIterator> myFiller = Stream.generate(new Supplier<BigIntegerIterator>() {
-            int i = 2;
-
-            @Override
-            public BigIntegerIterator get() {
-                return new BigIntegerIterator(i++);
-            }
-        }).limit(maxPrime).collect(Collectors.toList());
-
-        for (BigIntegerIterator integer : myFiller) {
-            primeNumbers.add(integer.getContain());
+        if (maxPrime < 0) {
+            throw new IllegalArgumentException("Value must be greater or equal to 0 ");
         }
-
-        List<Integer> primeNumbersToRemove = Collections.synchronizedList(new LinkedList<>());
-        CountDownLatch latch = new CountDownLatch(maxPrime);
-        ForkJoinPool executors = new ForkJoinPool();
-        synchronized (primeNumbersToRemove) {
-            for (Integer candidate : primeNumbers) {
-                executors.submit(() -> {
-                    try {
-                        isPrime(primeNumbers, candidate);
-                    } catch (Exception e) {
-                        primeNumbersToRemove.add(candidate);
-                    }
-                    latch.countDown();
-                });
+        List<Integer> primes = new ArrayList<>();
+        if (maxPrime < 2) {
+            return primes;
+        }
+        for (int i = 2; i <= maxPrime; i++) {
+            if (com.calculator.utils.NumberUtils.isPrime(i)) {
+                primes.add(i);
             }
         }
-        latch.await();
-        executors.shutdownNow();
-        for (Integer toRemove : primeNumbersToRemove) {
-            primeNumbers.remove(toRemove);
-        }
-
-        return primeNumbers;
-    }
-
-    private static void isPrime(List<Integer> primeNumbers, Integer candidate) throws Exception {
-        for (Integer j : primeNumbers.subList(0, candidate - 2)) {
-            if (candidate % j == 0) {
-                throw new Exception();
-            }
-        }
+        return primes;
     }
 }
