@@ -11,6 +11,9 @@ import java.util.stream.Stream;
 import static com.calculator.utils.NumberUtils.isPrime;
 
 public class FixedPrimeCalculator {
+    public static java.util.List<Integer> computeUpTo(int maxPrime) throws InterruptedException {
+        return new java.util.ArrayList<>(getPrimes(maxPrime));
+    }
     public static void main(String[] args) throws InterruptedException {
         for (Integer prime : getPrimes(Integer.parseInt(args[0]))) {
             System.out.print(prime + "\n");

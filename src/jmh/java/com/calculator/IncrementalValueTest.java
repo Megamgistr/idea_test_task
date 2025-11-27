@@ -12,21 +12,21 @@ public class IncrementalValueTest extends BaseBenchmarkTest {
 
     @Benchmark
     public void rawValueIncrease() throws InterruptedException {
-        RawPrimeCalculator.main(new String[]{incremental_value});
+        RawPrimeCalculator.computeUpTo(Integer.parseInt(incremental_value));
     }
 
     @Benchmark
     public void fixedValueIncrease() throws InterruptedException {
-        FixedPrimeCalculator.main(new String[]{incremental_value});
+        FixedPrimeCalculator.computeUpTo(Integer.parseInt(incremental_value));
     }
 
     @Benchmark
     public void treeValueIncrease() throws InterruptedException {
-        TreePrimeCalculator.main(new String[]{incremental_value});
+        TreePrimeCalculator.computeUpTo(Integer.parseInt(incremental_value));
     }
 
     @Benchmark
     public void segmentedSieveValueIncrease() throws InterruptedException {
-        SegmentedSievePrimeCalculator.main(new String[]{incremental_value});
+        SegmentedSievePrimeCalculator.computeUpTo(Integer.parseInt(incremental_value));
     }
 }

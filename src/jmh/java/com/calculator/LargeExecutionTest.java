@@ -12,16 +12,12 @@ public class LargeExecutionTest extends BaseBenchmarkTest {
 
     @Benchmark
     public void rawLargeExecution() throws InterruptedException {
-        for (int i = 0; i < 1000; i++) {
-            RawPrimeCalculator.main(new String[]{LARGE_EXECUTION_VALUE});
-        }
+        RawPrimeCalculator.computeUpTo(Integer.parseInt(LARGE_EXECUTION_VALUE));
     }
 
     @Benchmark
     public void fixedLargeExecution() throws InterruptedException {
-        for (int i = 0; i < 1000; i++) {
-            FixedPrimeCalculator.main(new String[]{LARGE_EXECUTION_VALUE});
-        }
+        FixedPrimeCalculator.computeUpTo(Integer.parseInt(LARGE_EXECUTION_VALUE));
     }
 
     @Benchmark

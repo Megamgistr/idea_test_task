@@ -1,7 +1,16 @@
 package com.calculator;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Segmented Sieve of Eratosthenes implementation for finding prime numbers.
@@ -17,15 +26,21 @@ public class SegmentedSievePrimeCalculator {
 
     private static final int SEGMENT_SIZE = 32768; // 32KB cache-friendly size
 
+    public static List<Integer> computeUpTo(int maxPrime) throws InterruptedException {
+        Collection<Integer> primes = getPrimes(maxPrime);
+        return new ArrayList<>(primes);
+    }
+
     public static void main(String[] args) throws InterruptedException {
+        if (args.length == 0) {
+            throw new NumberFormatException("Missing argument");
+        }
         int maxPrime = Integer.parseInt(args[0]);
         if (maxPrime < 0) {
             throw new IllegalArgumentException("Value must be greater or equal to 0");
         }
 
-        Collection<Integer> primes = getPrimes(maxPrime);
-
-        for (Integer prime : primes) {
+        for (Integer prime : computeUpTo(maxPrime)) {
             System.out.print(prime + "\n");
         }
     }
@@ -130,11 +145,11 @@ public class SegmentedSievePrimeCalculator {
             // For each base prime, mark its multiples in current segment
             for (int prime : basePrimes) {
                 // Find the first multiple of prime in [low, high]
-                int start = Math.max(prime * prime, ((low + prime - 1) / prime) * prime);
+                long start = Math.max(1L * prime * prime, ((low + (long) prime - 1L) / prime) * 1L * prime);
 
                 // Mark all multiples of prime in the segment
-                for (int j = start; j <= high; j += prime) {
-                    isPrime[j - low] = false;
+                for (long j = start; j <= high; j += prime) {
+                    isPrime[(int) (j - low)] = false;
                 }
             }
 

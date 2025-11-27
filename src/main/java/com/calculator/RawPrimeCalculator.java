@@ -25,6 +25,9 @@ class BigIntegerIterator {
 }
 
 public class RawPrimeCalculator {
+    public static java.util.List<Integer> computeUpTo(int maxPrime) throws InterruptedException {
+        return getPrimes(maxPrime);
+    }
     public static void main(String[] args) throws InterruptedException {
         for (Integer prime : getPrimes(Integer.parseInt(args[0]))) {
             System.out.print(prime + "\n");

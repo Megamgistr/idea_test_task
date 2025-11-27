@@ -10,6 +10,36 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class TreePrimeCalculator {
+    public static java.util.List<Integer> computeUpTo(int maxPrime) throws InterruptedException {
+        if (maxPrime < 0) {
+            throw new IllegalArgumentException("Value must be greater or equal to 0 ");
+        }
+        if (maxPrime < 2) {
+            return new java.util.ArrayList<>();
+        }
+        int chunkSize = 10000;
+        int chunkCount = getChunkCount(maxPrime, chunkSize);
+        java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(chunkCount);
+        java.util.concurrent.ForkJoinPool executors = new java.util.concurrent.ForkJoinPool();
+        java.util.Set<Integer> set = new java.util.concurrent.ConcurrentSkipListSet<>();
+
+        int start = 2;
+        int end = Math.min(maxPrime, start + chunkSize);
+        for (int i = 0; i < chunkCount; i++) {
+            int finalStart = start;
+            int finalEnd = end;
+            executors.submit(() -> {
+                addPrimes(finalStart, finalEnd, set);
+                latch.countDown();
+            });
+            start = end + 1;
+            end = Math.min(maxPrime, start + chunkSize);
+            chunkSize = Math.min(1, chunkSize / 10);
+        }
+        latch.await();
+        executors.shutdownNow();
+        return new java.util.ArrayList<>(set);
+    }
     private static int getChunkCount(int maxPrime, int chunkSize) {
         int result = 1;
         while (chunkSize != 1 && maxPrime > chunkSize) {

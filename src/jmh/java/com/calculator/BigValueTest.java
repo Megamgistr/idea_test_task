@@ -12,21 +12,21 @@ public class BigValueTest extends BaseBenchmarkTest {
 
     @Benchmark
     public void rawBigInt() throws InterruptedException {
-        RawPrimeCalculator.main(new String[]{BIG_INT_VALUE});
+        RawPrimeCalculator.computeUpTo(Integer.parseInt(BIG_INT_VALUE));
     }
 
     @Benchmark
     public void fixedBigInt() throws InterruptedException {
-        FixedPrimeCalculator.main(new String[]{BIG_INT_VALUE});
+        FixedPrimeCalculator.computeUpTo(Integer.parseInt(BIG_INT_VALUE));
     }
 
     @Benchmark
     public void treeBigInt() throws InterruptedException {
-        TreePrimeCalculator.main(new String[]{BIG_INT_VALUE});
+        TreePrimeCalculator.computeUpTo(Integer.parseInt(BIG_INT_VALUE));
     }
 
     @Benchmark
     public void segmentedSieveBigInt() throws InterruptedException {
-        SegmentedSievePrimeCalculator.main(new String[]{BIG_INT_VALUE});
+        SegmentedSievePrimeCalculator.computeUpTo(Integer.parseInt(BIG_INT_VALUE));
     }
 }
