@@ -34,7 +34,7 @@ public class TreePrimeCalculator {
             });
             start = end + 1;
             end = Math.min(maxPrime, start + chunkSize);
-            chunkSize = Math.min(1, chunkSize / 10);
+            chunkSize = Math.max(1, chunkSize / 10);
         }
         latch.await();
         executors.shutdownNow();
@@ -89,7 +89,7 @@ public class TreePrimeCalculator {
             });
             start = end + 1;
             end = Math.min(maxPrime, start + chunkSize);
-            chunkSize = Math.min(1, chunkSize / 10);
+            chunkSize = Math.max(1, chunkSize / 10);
         }
         latch.await();
         executors.shutdownNow();
