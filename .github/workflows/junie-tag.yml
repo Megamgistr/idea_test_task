@@ -31,6 +31,7 @@ jobs:
 
       - name: Run Junie
         id: junie
-        uses: Megamgistr/gh-action@nikita.barkov/prompt
+        uses: JetBrains/junie-github-action@main
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
+          create_new_branch_for_pr: true

@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Junie
         id: junie
-        uses: Megamgistr/gh-action@nikita.barkov/prompt
+        uses: JetBrains/junie-github-action@main
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
           resolve_conflicts: true
