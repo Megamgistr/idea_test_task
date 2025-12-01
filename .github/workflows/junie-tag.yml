@@ -31,7 +31,7 @@ jobs:
 
       - name: Run Junie
         id: junie
-        uses: JetBrains/junie-github-action@main
+        uses: JetBrains/junie-github-action@nikita-barkov/singl-comment
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
-          create_new_branch_for_pr: true
+          use_single_comment: true

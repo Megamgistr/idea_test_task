@@ -1,7 +1,7 @@
 name: junie validate pr
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, synchronize, reopened]
 
 jobs:
   junie:
@@ -18,9 +18,10 @@ jobs:
 
       - name: Run Junie
         id: junie
-        uses: JetBrains/junie-github-action@main
+        uses: JetBrains/junie-github-action@nikita-barkov/singl-comment
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
+          use_single_comment: true
           prompt: |
             Please review this pull request with a focus on:
             - Code quality and best practices
