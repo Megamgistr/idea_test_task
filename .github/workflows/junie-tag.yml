@@ -13,10 +13,10 @@ on:
 jobs:
   junie:
     if: |
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@junie')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@junie')) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@junie')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@junie') || contains(github.event.issue.title, '@junie')))
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@junify')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@junify')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@junify')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@junify') || contains(github.event.issue.title, '@junify')))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -31,7 +31,7 @@ jobs:
 
       - name: Run Junie
         id: junie
-        uses: JetBrains/junie-github-action@nikita-barkov/singl-comment
+        uses: JetBrains/junie-github-action@main
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
           use_single_comment: true
