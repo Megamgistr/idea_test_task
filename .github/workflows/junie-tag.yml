@@ -34,4 +34,5 @@ jobs:
         uses: JetBrains/junie-github-action@main
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
+          custom_github_token: ${{ secrets.CUSTOM_GH_TOKEN }}
           use_single_comment: true
