@@ -1,0 +1,25 @@
+name: Fix Failed Checks
+
+on:
+  workflow_run:
+    workflows: ["Test that always fails"]
+    types: [completed]
+
+jobs:
+  analyze-failures:
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JetBrains/junie-github-action@main
+        with:
+          junie_api_key: ${{ secrets.JUNIE_API_KEY }}
+          allowed_mcp_servers: mcp_github_checks_server
+          junie_version: 532.2.0
+          prompt: |
+            Investigate the failed CI checks and suggest fixes.
+            Use the get_pr_failed_checks_info MCP tool to analyze error logs.
