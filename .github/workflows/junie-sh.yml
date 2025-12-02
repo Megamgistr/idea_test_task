@@ -1,0 +1,27 @@
+name: Junie sh
+on:
+  schedule:
+    - cron: "0 * * * *"  # Every hour at minute 0
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: JetBrains/junie-github-action@main
+        with:
+          junie_api_key: ${{ secrets.JUNIE_API_KEY }}
+          prompt: |
+            Perform repository maintenance:
+
+            1. Check for outdated dependencies
+            2. Scan for security vulnerabilities
+            3. Check for TODO comments in recent commits
+            4. Verify README.md examples still work
