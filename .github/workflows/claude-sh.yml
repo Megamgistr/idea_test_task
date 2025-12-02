@@ -1,7 +1,7 @@
 name: Claude sh
-on:
-  schedule:
-    - cron: "0 * * * *"  # Every hour at minute 0
+#on:
+#  schedule:
+#    - cron: "0 * * * *"  # Every hour at minute 0
 
 jobs:
   maintenance:
