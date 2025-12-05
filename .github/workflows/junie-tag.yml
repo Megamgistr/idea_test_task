@@ -13,16 +13,15 @@ on:
 jobs:
   junie:
     if: |
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@junify')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@junify')) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@junify')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@junify') || contains(github.event.issue.title, '@junify')))
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@junie-agent')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@junie-agent')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@junie-agent')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@junie-agent') || contains(github.event.issue.title, '@junie-agent')))
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
       issues: write
-      actions: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
