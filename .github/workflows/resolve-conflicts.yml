@@ -17,7 +17,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      actions: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,5 +28,4 @@ jobs:
         uses: JetBrains/junie-github-action@main
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
-          custom_github_token: ${{ secrets.CUSTOM_GH_TOKEN }}
           resolve_conflicts: true

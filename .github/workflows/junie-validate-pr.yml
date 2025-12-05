@@ -7,9 +7,7 @@ jobs:
   junie:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
       pull-requests: write
-      actions: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,7 +19,6 @@ jobs:
         uses: JetBrains/junie-github-action@main
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
-          custom_github_token: ${{ secrets.CUSTOM_GH_TOKEN }}
           use_single_comment: true
           prompt: |
             Please review this pull request with a focus on:
@@ -29,3 +26,4 @@ jobs:
             - Potential bugs or issues
             - Security implications
             - Performance considerations
+           Do not update any files, just give feedback.
