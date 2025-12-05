@@ -19,7 +19,6 @@ jobs:
         with:
           junie_api_key: ${{ secrets.JUNIE_API_KEY }}
           allowed_mcp_servers: mcp_github_checks_server
-          junie_version: 532.2.0
           use_single_comment: true
           prompt: |
             CI check ${{ github.event.workflow_run.name }} failed.
