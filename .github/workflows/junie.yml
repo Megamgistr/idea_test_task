@@ -1,0 +1,17 @@
+      name: Junie CI
+
+      on:
+      push:
+  branches: [ main, master ]
+pull_request:
+  branches: [ main, master ]
+
+      jobs:
+        junie:
+          runs-on: ubuntu-latest
+          steps:
+            - uses: actions/checkout@v3
+            - name: Run Junie
+              uses: JetBrains/junie-github-action@v0
+              with:
+                api_key: ${{ secrets.JUNIE_API_KEY }}
